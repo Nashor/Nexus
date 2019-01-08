@@ -41,14 +41,14 @@ class Nexus3:
       self.diffuse = diffuse
       
       self.a = maxfluence - minfluence + diffuse
-      self.b = minfluence + diffuse
-      self.c = -(radius * radius) / log(diffuse / self.a)
+      self.b = minfluence - diffuse
+      self.c = (radius * radius) / log(diffuse / self.a)
    
    def influence(self, dist):
       if dist > self.radius:
          return 0
       else:
-         return self.a * exp(-(dist * dist) / self.c) + self.b
+         return self.a * exp((dist * dist) / self.c) + self.b
 
 def main():
    minfluence = 10
