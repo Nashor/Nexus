@@ -3,6 +3,7 @@ from math import exp, log
 import numpy as np
 import matplotlib.pyplot as plt
 import sqlite3
+from time import time
 
 Coord = namedtuple('Coord', ['x', 'y', 'z'])
 
@@ -129,4 +130,39 @@ def main():
    '''
 
 if __name__ == '__main__':
-   main()
+   dist2 = lambda x,y,z: x**2+y**2+z**2
+   r = 10
+   r2 = r**2
+   nexus = Nexus(10, 20, r, 1)
+
+   tally = 0
+   a = time()
+   for i in range(-r, r + 1):
+      for j in range(-r, r + 1):
+         for k in range(-r, r + 1):
+            tally += nexus.influence(coord=Coord(i,j,k))
+   b = time()
+   print(tally, (b-a)*1000)
+   
+   tally = 0
+   a = time()
+   for i in range(-r, r + 1):
+      for j in range(-r, r + 1):
+         for k in range(-r, r + 1):
+            inf = nexus.influence(coord=Coord(i,j,k))
+            if inf == 0:
+               break
+            else:
+               tally += inf
+   b = time()
+   print(tally, (b-a)*1000)
+   
+   dists = []
+   for i in range(-r, r + 1):
+      for j in range(-r, r + 1):
+         for k in range(-r, r + 1):
+            d2 = dist2(i,j,k)
+            if d2 <= r2 and d2 not in dists:
+               dists.append(d2)
+   print(sorted(dists))
+   #main()
