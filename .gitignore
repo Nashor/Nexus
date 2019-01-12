@@ -4,3 +4,9 @@ __pycache__/
 
 # Database files
 *.db
+
+# Java / Maven / Eclipse
+.classpath
+.project
+.settings/
+target/
