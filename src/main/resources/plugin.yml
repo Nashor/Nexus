@@ -1,0 +1,4 @@
+name: Nexus
+main: com.nashorsmind.nexus.NexusPlugin
+version: 0.0.1
+description: A block protection plugin.
